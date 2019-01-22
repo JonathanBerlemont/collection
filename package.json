@@ -1,0 +1,22 @@
+{
+  "name": "collection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathanBerlemont/collection.git"
+  },
+  "author": "Jonathan Berlemont",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JonathanBerlemont/collection/issues"
+  },
+  "homepage": "https://github.com/JonathanBerlemont/collection#readme",
+  "dependencies": {
+    "bootstrap": "^4.2.1"
+  }
+}
