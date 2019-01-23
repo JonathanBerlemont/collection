@@ -70,7 +70,7 @@
                         while ($donnees = $requete->fetch()) {
                             echo '
                             <div class="carousel-item">
-                            <a href="./img/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/'.$donnees["serie"].$donnees["numero"].'" alt="" class="d-block w-100"></a>
+                            <a href="./img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" class="d-block w-100"></a>
                             </div>
                             ';
                         }
@@ -143,7 +143,7 @@
                             .$donnees['titre']
                             .'<p> 
 
-                            <a href="./img/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
+                            <a href="./img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
 
                             if(isset($_GET['auteur'])){ //Verifie que la checkbox a été checkée
                                 echo '<p><strong>Auteurs:</strong><br/>';

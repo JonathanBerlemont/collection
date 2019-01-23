@@ -13,7 +13,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Ma Musique</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
         <link rel="stylesheet" href="./public/css/music.css">
 
@@ -69,7 +68,7 @@
                         while ($donnees = $requete->fetch()) {
                             echo '
                             <div class="carousel-item">
-                            <a href="./img/'.$donnees['titre'].'" target="_blank"><img src="./img/'.$donnees["titre"].'.jpg" alt="" class="d-block w-100"></a>
+                            <a href="./img/musique/'.$donnees['titre'].'" target="_blank"><img src="./img/musique/'.$donnees["titre"].'.jpg" alt="" class="d-block w-100"></a>
                             </div>
                             ';
                         }
@@ -178,9 +177,9 @@
                     while ($donnees = $requete->fetch()) {
                         echo '
                             <div class="col text-center mb-5">
-                                <img src="./img/'.$donnees['groupe'].'_LOGO.png" alt="" style="width:150px;">
+                                <img src="./img/logo/'.$donnees['groupe'].'_LOGO.png" alt="" style="width:150px;">
                                 <p style="height:30px">'.$donnees['titre'].'</p>
-                                <a href="./img/'.$donnees['titre'].'" target="_blank"><img src="./img/'.$donnees['titre'].'.jpg" style="width:200px;height:200px"></a><br/>
+                                <a href="./img/musique/'.$donnees['titre'].'" target="_blank"><img src="./img/musique/'.$donnees['titre'].'.jpg" style="width:200px;height:200px"></a><br/>
                                 <p style="height:5px;">'.$donnees['annee'].'</p> 
                                 <p>'.$donnees['genre'].'</p> 
                             </div>';
