@@ -164,9 +164,6 @@
                 
                 
                 //execution de ma query 
-                print_r($_GET);
-                echo '<br/>';
-                print_r($query);
                 $requete = $db->query($query);
                 
             ?>

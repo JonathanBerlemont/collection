@@ -3,10 +3,6 @@
     src: url('../../fonts/maiden.ttf');    
 }
 @font-face {
-    font-family: "doom";
-    src: url('../../fonts/doom.ttf');    
-}
-@font-face {
     font-family: "spiderman";
     src: url('../../fonts/spiderman.ttf');     
 }
@@ -14,11 +10,8 @@
 .maiden {
     font-family: "maiden";
 }
-.doom {
-    font-family: "doom";
-    font-size: 35px;
-}
 .spiderman {
     font-family: "spiderman";
     text-transform: uppercase;
+    font-size: 20px;
 }

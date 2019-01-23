@@ -4,11 +4,6 @@
 }
 
 @font-face {
-  font-family: "doom";
-  src: url("../../fonts/doom.ttf");
-}
-
-@font-face {
   font-family: "spiderman";
   src: url("../../fonts/spiderman.ttf");
 }
@@ -17,14 +12,10 @@
   font-family: "maiden";
 }
 
-.doom {
-  font-family: "doom";
-  font-size: 35px;
-}
-
 .spiderman {
   font-family: "spiderman";
   text-transform: uppercase;
+  font-size: 20px;
 }
 
 /*!
@@ -10434,5 +10425,26 @@ body #carouselExampleSlidesOnly {
   height: 300px;
   width: 200px;
   overflow: hidden;
+}
+
+body .col {
+  min-width: 220px;
+  max-width: 250px;
+  margin: 0 20px;
+}
+
+body .col .comicBackground {
+  -webkit-clip-path: polygon(20% 0, 100% 0, 100% 95%, 80% 100%, 0 100%, 0 5%);
+          clip-path: polygon(20% 0, 100% 0, 100% 95%, 80% 100%, 0 100%, 0 5%);
+  height: 100%;
+  width: 100%;
+  background-color: #5a5353;
+  position: absolute;
+  left: 0;
+}
+
+body .col .comicContenu {
+  position: relative;
+  z-index: 1;
 }
 /*# sourceMappingURL=index.css.map */
