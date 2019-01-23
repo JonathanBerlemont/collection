@@ -6,6 +6,15 @@
     } catch(Exception $e) {
         die('Erreur: '.$e->getMessage());
     }
+
+    $fichier = fopen("compteur.txt", "r");
+    $compteur = fgets($fichier);
+    fclose($fichier);
+    echo 'Apres lecture: '.$compteur;
+    $compteur = (intval($compteur)) + 1;
+    echo '<br/>Après ajout: '.$compteur;
+    $fichier = fopen("compteur.txt", "w");
+    fputs($fichier, strval($compteur));
 ?>
 
 <!DOCTYPE html>
@@ -148,6 +157,7 @@
 
                                 <a href="./img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
 
+                                //Auteurs
                                 if(isset($_GET['auteur'])){ //Verifie que la checkbox a été checkée
                                     echo '<p><strong>Auteurs:</strong><br/>';
                                     for ($i = 1; $i <= 5; $i++){ //Echo chaque auteurs si la colonne ne contient pas de valeur null
@@ -155,13 +165,16 @@
                                     }
                                     echo '</p>';}
                                 
+                                //Dessinateurs
                                 if(isset($_GET['dessinateur'])){ //Verifie que la checkbox a été checkée
                                     echo '<p><strong>Dessinateurs:</strong><br/>';
                                     for ($i = 1; $i <= 6; $i++){ //Echo chaque auteurs si la colonne ne contient pas de valeur null
                                         echo (isset($donnees['dessinateur_'.$i])) ? $donnees['dessinateur_'.$i].'<br/>' : null ;
                                     }
                                     echo '</p>';}
+                                
 
+                                //Cover Artist
                                 if(isset($_GET['cover'])){ //Verifie que la checkbox a été checkée
                                     echo (isset($donnees['cover'])) ? '<p><strong>Cover:</strong><br/>'.$donnees['cover'].'<br/>' : null ;} //Echo le cover artist si la colonne n'est pas null
                             echo '</div>
