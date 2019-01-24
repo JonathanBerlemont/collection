@@ -10427,12 +10427,13 @@ body #carouselExampleSlidesOnly {
   overflow: hidden;
 }
 
-body .col {
-  max-width: 250px;
-  margin: 0 20px;
+body .col .affichageComics {
+  width: 200px;
+  margin: auto;
+  position: relative;
 }
 
-body .col .comicBackground {
+body .col .affichageComics .comicBackground {
   -webkit-clip-path: polygon(20% 0, 100% 0, 100% 95%, 80% 100%, 0 100%, 0 5%);
           clip-path: polygon(20% 0, 100% 0, 100% 95%, 80% 100%, 0 100%, 0 5%);
   height: 100%;
@@ -10442,7 +10443,7 @@ body .col .comicBackground {
   left: 0;
 }
 
-body .col .comicContenu {
+body .col .affichageComics .comicContenu {
   position: relative;
   z-index: 1;
 }

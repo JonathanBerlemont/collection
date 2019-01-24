@@ -4,17 +4,28 @@
     try {
         $db = new PDO('mysql:host=localhost;dbname=mes_comics;charset=utf8','root','');
     } catch(Exception $e) {
-        die('Erreur: '.$e->getMessage());
+        die('Erreur: Impossible de connecter la base de donnée');
     }
-
+    
+    //Ouverture du fichier de comptage des visites
     $fichier = fopen("compteur.txt", "r");
     $compteur = fgets($fichier);
     fclose($fichier);
-    echo 'Apres lecture: '.$compteur;
-    $compteur = (intval($compteur)) + 1;
-    echo '<br/>Après ajout: '.$compteur;
-    $fichier = fopen("compteur.txt", "w");
-    fputs($fichier, strval($compteur));
+
+    //Si la personne est venue il y a moins d'un jour, le cookie existera car sa durée de vie est de 1 jour.
+    //On passe donc toute cette phase d'incrément du cookie
+    if (!isset($_COOKIE['count_timer'])){
+        //La personne est venue il y a plus d'un jour (car le cookie n'existe plus) 
+        //=> incrémentation
+        $compteur = (intval($compteur)) + 1;
+        $fichier = fopen("compteur.txt", "w");
+        fputs($fichier, strval($compteur));
+        fclose($fichier);
+
+        //création du cookie et durée de vie mise sur 1 jour
+        setcookie('count_timer', time(), (time()+(3600*24)));
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -58,9 +69,11 @@
                 </div>
             </nav>
         </header>
-
+        
         <!--Titre-->
         <section id="titre"><h1 class="text-center mt-4 py-3 bg-dark text-light"><strong>COMICS</strong></h1></section>
+        
+        <h3 class="text-center">C'est la <?php echo $compteur ?>ème visite de ce site</h3>
 
         <!--CAROUSEL-->
         <section id="carousel" class="my-5 bg-dark">
@@ -144,44 +157,43 @@
                     while ($donnees = $requete->fetch()) {
                         echo '
                         <div class="col text-center mb-5">
-                            
-                            <div class="comicBackground"></div>
-                            <div class="comicContenu text-light pt-3">
-                                <strong class="text-danger spiderman">'
-                                .$donnees['serie']
-                                .'</strong><br/>
+                            <div class="affichageComics">
+                                <div class="comicBackground"></div>
+                                <div class="comicContenu text-light py-3">
+                                    <strong class="text-danger spiderman">'
+                                    .$donnees['serie']
+                                    .'</strong><br/>
 
-                                <p class="titre" style="height:20px">'
-                                .$donnees['titre']
-                                .'<p> 
+                                    <p class="titre" style="height:20px">'
+                                    .$donnees['titre']
+                                    .'<p> 
 
-                                <a href="./img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
+                                    <a href="./img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
 
-                                //Auteurs
-                                if(isset($_GET['auteur'])){ //Verifie que la checkbox a été checkée
-                                    echo '<p><strong>Auteurs:</strong><br/>';
-                                    for ($i = 1; $i <= 5; $i++){ //Echo chaque auteurs si la colonne ne contient pas de valeur null
-                                        echo (isset($donnees['auteur_'.$i])) ? $donnees['auteur_'.$i].'<br/>' : null ;
-                                    }
-                                    echo '</p>';}
-                                
-                                //Dessinateurs
-                                if(isset($_GET['dessinateur'])){ //Verifie que la checkbox a été checkée
-                                    echo '<p><strong>Dessinateurs:</strong><br/>';
-                                    for ($i = 1; $i <= 6; $i++){ //Echo chaque auteurs si la colonne ne contient pas de valeur null
-                                        echo (isset($donnees['dessinateur_'.$i])) ? $donnees['dessinateur_'.$i].'<br/>' : null ;
-                                    }
-                                    echo '</p>';}
-                                
+                                    //Auteurs
+                                    if(isset($_GET['auteur'])){ //Verifie que la checkbox a été checkée
+                                        echo '<p><strong>Auteurs:</strong><br/>';
+                                        for ($i = 1; $i <= 5; $i++){ //Echo chaque auteurs si la colonne ne contient pas de valeur null
+                                            echo (isset($donnees['auteur_'.$i])) ? $donnees['auteur_'.$i].'<br/>' : null ;
+                                        }
+                                        echo '</p>';}
+                                    
+                                    //Dessinateurs
+                                    if(isset($_GET['dessinateur'])){ //Verifie que la checkbox a été checkée
+                                        echo '<p><strong>Dessinateurs:</strong><br/>';
+                                        for ($i = 1; $i <= 6; $i++){ //Echo chaque auteurs si la colonne ne contient pas de valeur null
+                                            echo (isset($donnees['dessinateur_'.$i])) ? $donnees['dessinateur_'.$i].'<br/>' : null ;
+                                        }
+                                        echo '</p>';}
+                                    
 
-                                //Cover Artist
-                                if(isset($_GET['cover'])){ //Verifie que la checkbox a été checkée
-                                    echo (isset($donnees['cover'])) ? '<p><strong>Cover:</strong><br/>'.$donnees['cover'].'<br/>' : null ;} //Echo le cover artist si la colonne n'est pas null
-                            echo '</div>
+                                    //Cover Artist
+                                    if(isset($_GET['cover'])){ //Verifie que la checkbox a été checkée
+                                        echo (isset($donnees['cover'])) ? '<p><strong>Cover:</strong><br/>'.$donnees['cover'].'<br/>' : null ;} //Echo le cover artist si la colonne n'est pas null
+                                echo '</div>
+                                </div>
                             </div>
-                        
-                        
-                        ';
+                            ';
                     }
                 ?>
                 

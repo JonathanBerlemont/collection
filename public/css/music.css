@@ -10434,4 +10434,8 @@ body #carousel {
 body #carousel #carouselExampleSlidesOnly {
   max-width: 400px;
 }
+
+body .imgLogo {
+  vertical-align: middle;
+}
 /*# sourceMappingURL=music.css.map */

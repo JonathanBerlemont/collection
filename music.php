@@ -1,8 +1,22 @@
 <?php
+    session_start();
+
     try {
         $db = new PDO('mysql:host=localhost;dbname=ma_musique;charset=utf8','root','');
     } catch(Exception $e) {
         die('Erreur: '.$e->getMessage());
+    }
+
+    $fichier = fopen("compteur.txt", "r");
+    $compteur = fgets($fichier);
+
+    if ((time() - filemtime("compteur.txt")) > (3600*24)){
+        fclose($fichier);
+        $compteur = (intval($compteur)) + 1;
+        $fichier = fopen("compteur.txt", "w");
+        fputs($fichier, strval($compteur));
+        echo filemtime("compteur.txt");
+        fclose($fichier);
     }
 ?>
 
@@ -50,6 +64,8 @@
 
         <!--Titre-->
         <section id="titre"><h1 class="text-center mt-4 py-3 bg-dark text-light"><strong>MUSIQUE</strong></h1></section>
+
+        <h3 class="text-center">C'est la <?php echo $compteur?>ème visites de ce site</h3>
 
         <!--CAROUSEL-->
         <section id="carousel" class="my-5 bg-dark">
@@ -174,10 +190,10 @@
                     while ($donnees = $requete->fetch()) {
                         echo '
                             <div class="col text-center mb-5">
-                                <img src="./img/logo/'.$donnees['groupe'].'_LOGO.png" alt="" style="width:150px;">
-                                <p style="height:30px">'.$donnees['titre'].'</p>
+                                <div style="width:180px;height:100px;margin:auto;"><img src="./img/logo/'.$donnees['groupe'].'_LOGO.png" alt="" style="width:100%;"></div>
+                                <p style="height:35px">'.$donnees['titre'].'</p>
                                 <a href="./img/musique/'.$donnees['titre'].'" target="_blank"><img src="./img/musique/'.$donnees['titre'].'.jpg" style="width:200px;height:200px"></a><br/>
-                                <p style="height:5px;">'.$donnees['annee'].'</p> 
+                                <p style="height:5px;">'.$donnees['annee'].'</p>
                                 <p>'.$donnees['genre'].'</p> 
                             </div>';
                     }
