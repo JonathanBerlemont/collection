@@ -13,7 +13,7 @@ while ($donnees = $requete->fetch()) {
     .$donnees['titre']
     .'<p> 
     
-    <a href="./img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
+    <a href="./public/img/comics/'.$donnees["serie"].$donnees["numero"].'" target="_blank"><img src="./public/img/comics/'.$donnees["serie"].$donnees["numero"].'" alt="" style="width:150px"></a><br/>';
     
     //Auteurs
     if(isset($_GET['auteur'])){ //Verifie que la checkbox a été checkée
