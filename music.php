@@ -1,23 +1,9 @@
 <?php
-    session_start();
+    //connection à la db
+    include './src/php/music/db_connect.php';
 
-    try {
-        $db = new PDO('mysql:host=localhost;dbname=ma_musique;charset=utf8','root','');
-    } catch(Exception $e) {
-        die('Erreur: '.$e->getMessage());
-    }
-
-    $fichier = fopen("compteur.txt", "r");
-    $compteur = fgets($fichier);
-
-    if ((time() - filemtime("compteur.txt")) > (3600*24)){
-        fclose($fichier);
-        $compteur = (intval($compteur)) + 1;
-        $fichier = fopen("compteur.txt", "w");
-        fputs($fichier, strval($compteur));
-        echo filemtime("compteur.txt");
-        fclose($fichier);
-    }
+    //incrémentation du compteur
+    include './src/php/compteur.php';
 ?>
 
 <!DOCTYPE html>
@@ -81,13 +67,7 @@
                         <p class="text-center text-light maiden" style="margin-top: 50px; font-size: 50px">Bienvenue</p>
                     </div>
                     <?php
-                        while ($donnees = $requete->fetch()) {
-                            echo '
-                            <div class="carousel-item">
-                            <a href="./img/musique/'.$donnees['titre'].'" target="_blank"><img src="./img/musique/'.$donnees["titre"].'.jpg" alt="" class="d-block w-100"></a>
-                            </div>
-                            ';
-                        }
+                        include './src/php/music/print_carousel.php';
                     ?>
                 </div>
             </div>
@@ -108,6 +88,10 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Judas Priest" <?php echo ((isset($_GET['bands']) && in_array('Judas Priest', $_GET['bands']))) ? 'checked' : null ;?> >Judas Priest</label>
                                 <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Paradise Lost" <?php echo ((isset($_GET['bands']) && in_array('Paradise Lost', $_GET['bands']))) ? 'checked' : null ;?> >Paradise Lost</label>
+                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Nightwish" <?php echo ((isset($_GET['bands']) && in_array('Nightwish', $_GET['bands']))) ? 'checked' : null ;?> >Nightwish</label>
+                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Draconian" <?php echo ((isset($_GET['bands']) && in_array('Draconian', $_GET['bands']))) ? 'checked' : null ;?> >Draconian</label>
+                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="My Dying Bride" <?php echo ((isset($_GET['bands']) && in_array('My Dying Bride', $_GET['bands']))) ? 'checked' : null ;?> >My Dying Bride</label>
+                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Candlemass" <?php echo ((isset($_GET['bands']) && in_array('Candlemass', $_GET['bands']))) ? 'checked' : null ;?> >Candlemass</label>
                             </div>
                         </div>
                     </div>
@@ -121,6 +105,7 @@
                                 <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Doom Metal" <?php echo ((isset($_GET['genres']) && in_array('Doom Metal', $_GET['genres']))) ? 'checked' : null ;?> >Doom</label>
                                 <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Gothic Metal" <?php echo ((isset($_GET['genres']) && in_array('Gothic Metal', $_GET['genres']))) ? 'checked' : null ;?> >Gothic</label>
                                 <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Heavy Metal" <?php echo ((isset($_GET['genres']) && in_array('Heavy Metal', $_GET['genres']))) ? 'checked' : null ;?> >Heavy</label>
+                                <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Symphonic Metal" <?php echo ((isset($_GET['genres']) && in_array('Symphonic Metal', $_GET['genres']))) ? 'checked' : null ;?> >Symphonic</label>
                             </div>
                         </div>
                     </div>
@@ -131,72 +116,14 @@
 
         
             <?php
-                //Construction de ma query (car nombre de genres/groupes variable)
-                if (isset($_GET['genres'])){
-                    $genres = $_GET['genres'];
-                }
-                if (isset($_GET['bands'])){
-                    $bands = $_GET['bands'];
-                }
-
-
-                //Subquery pour chercher les groupes
-                $subquery = ('musique');
-                if (isset($bands) && sizeof($bands) != 0){
-                    $subquery = ('SELECT * FROM musique');
-                    $i=0;
-                    foreach($bands as $band){
-                        if ($i>0){
-                            $subquery = $subquery.(' OR groupe = "'.$band.'"');
-                        } else {
-                            $subquery = $subquery.(' WHERE groupe = "'.$band.'"');
-                            $i++;
-                        }
-                    }
-                }
-
-
-                //Ajout de la subquery à la query principale
-                if ($subquery != 'musique'){
-                    $query = ('SELECT * FROM ('.$subquery.') AS bands');
-                } else {
-                    $query = ('SELECT * FROM musique');
-                }
-                
-
-                //Query pour chercher les genres à partir des groupes
-                if (isset($genres) && sizeof($genres) != 0){
-                    $i=0;
-                    foreach($genres as $genre){
-                        if ($i>0){
-                            $query = $query.(' OR genre = "'.$genre.'"');
-                        } else {
-                            $query = $query.(' WHERE genre = "'.$genre.'"');
-                            $i++;
-                        }
-                    }
-                } 
-                $query = $query.(' ORDER BY groupe, annee DESC');
-                
-                
-                //execution de ma query 
-                $requete = $db->query($query);
+                include './src/php/music/get_albums.php'
                 
             ?>
 
             <div class="row w-75 mx-auto">
                 <?php
-                    //affichache du resultat de la query
-                    while ($donnees = $requete->fetch()) {
-                        echo '
-                            <div class="col text-center mb-5">
-                                <div style="width:180px;height:100px;margin:auto;"><img src="./img/logo/'.$donnees['groupe'].'_LOGO.png" alt="" style="width:100%;"></div>
-                                <p style="height:35px">'.$donnees['titre'].'</p>
-                                <a href="./img/musique/'.$donnees['titre'].'" target="_blank"><img src="./img/musique/'.$donnees['titre'].'.jpg" style="width:200px;height:200px"></a><br/>
-                                <p style="height:5px;">'.$donnees['annee'].'</p>
-                                <p>'.$donnees['genre'].'</p> 
-                            </div>';
-                    }
+                    //affichage du resultat de la query
+                    include './src/php/music/print_albums.php'
                 ?>
                 
             </div>
