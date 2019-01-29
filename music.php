@@ -16,7 +16,7 @@
 
         <link rel="stylesheet" href="./public/css/music.css">
 
-        <link rel="icon" href="./img/icon.png">
+        <link rel="icon" href="./public/img/icon.png">
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -72,8 +72,7 @@
                 </div>
             </div>
         </section>
-
-        <!--TEST AFFICHAGE COMICS-->
+        <!--TEST AFFICHAGE ALBUMS-->
         <section id="album">
             <!--Filters-->           
             <form class="mx-auto border rounded border-secondary mb-5 p-3 text-center" style="max-width:400px;" method="get"> 
@@ -86,12 +85,9 @@
                             Groupes
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Judas Priest" <?php echo ((isset($_GET['bands']) && in_array('Judas Priest', $_GET['bands']))) ? 'checked' : null ;?> >Judas Priest</label>
-                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Paradise Lost" <?php echo ((isset($_GET['bands']) && in_array('Paradise Lost', $_GET['bands']))) ? 'checked' : null ;?> >Paradise Lost</label>
-                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Nightwish" <?php echo ((isset($_GET['bands']) && in_array('Nightwish', $_GET['bands']))) ? 'checked' : null ;?> >Nightwish</label>
-                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Draconian" <?php echo ((isset($_GET['bands']) && in_array('Draconian', $_GET['bands']))) ? 'checked' : null ;?> >Draconian</label>
-                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="My Dying Bride" <?php echo ((isset($_GET['bands']) && in_array('My Dying Bride', $_GET['bands']))) ? 'checked' : null ;?> >My Dying Bride</label>
-                                <label class="dropdown-item"><input type="checkbox" name="bands[]" value="Candlemass" <?php echo ((isset($_GET['bands']) && in_array('Candlemass', $_GET['bands']))) ? 'checked' : null ;?> >Candlemass</label>
+                                <?php 
+                                    include './src/php/music/dropdown_get_bands.php';
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -102,10 +98,9 @@
                             Genres
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Doom Metal" <?php echo ((isset($_GET['genres']) && in_array('Doom Metal', $_GET['genres']))) ? 'checked' : null ;?> >Doom</label>
-                                <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Gothic Metal" <?php echo ((isset($_GET['genres']) && in_array('Gothic Metal', $_GET['genres']))) ? 'checked' : null ;?> >Gothic</label>
-                                <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Heavy Metal" <?php echo ((isset($_GET['genres']) && in_array('Heavy Metal', $_GET['genres']))) ? 'checked' : null ;?> >Heavy</label>
-                                <label class="dropdown-item"><input type="checkbox" name="genres[]" value="Symphonic Metal" <?php echo ((isset($_GET['genres']) && in_array('Symphonic Metal', $_GET['genres']))) ? 'checked' : null ;?> >Symphonic</label>
+                                <?php 
+                                    include './src/php/music/dropdown_get_genres.php';
+                                ?>
                             </div>
                         </div>
                     </div>
