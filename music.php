@@ -111,8 +111,8 @@
 
         
             <?php
+                //Query pour recupérer les albums
                 include './src/php/music/get_albums.php'
-                
             ?>
 
             <div class="row w-75 mx-auto">
