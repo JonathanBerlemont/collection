@@ -16098,31 +16098,4 @@ body header {
   top: 0;
   z-index: 10;
 }
-
-body #carouselExampleSlidesOnly {
-  height: 300px;
-  width: 200px;
-  overflow: hidden;
-}
-
-body .col .affichageComics {
-  width: 200px;
-  margin: auto;
-  position: relative;
-}
-
-body .col .affichageComics .comicBackground {
-  -webkit-clip-path: polygon(20% 0, 100% 0, 100% 95%, 80% 100%, 0 100%, 0 5%);
-          clip-path: polygon(20% 0, 100% 0, 100% 95%, 80% 100%, 0 100%, 0 5%);
-  height: 100%;
-  width: 100%;
-  background-color: #525252;
-  position: absolute;
-  left: 0;
-}
-
-body .col .affichageComics .comicContenu {
-  position: relative;
-  z-index: 1;
-}
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=music-input.css.map */

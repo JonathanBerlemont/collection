@@ -1,15 +1,13 @@
-@import './_general.scss';
+@import './partials/_general.scss';
 
-body { 
-    #carousel {
-        height: 400px;
-
-        @media (max-width:500px){
-            height: auto;
-        } 
-        #carouselExampleSlidesOnly {
-            max-width: 400px;
+#carousel {
+    height: 400px;
     
-        }
+    @media (max-width:500px){
+        height: auto;
+    } 
+    #carouselExampleSlidesOnly {
+        max-width: 400px;
+        
     }
 }

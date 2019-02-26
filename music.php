@@ -18,35 +18,11 @@
 
         <link rel="icon" href="./public/img/icon.png">
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
     </head>
 
 	<body class="shadow">
         <!--Bar de navigation-->
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Ma collection</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php">Comics</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Musique</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Romans</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        <?php include './src/php/navbar.php' ?>
 
         <!--Titre-->
         <section id="titre"><h1 class="text-center mt-4 py-3 bg-dark text-light"><strong>MUSIQUE</strong></h1></section>
@@ -67,12 +43,13 @@
                         <p class="text-center text-light maiden" style="margin-top: 50px; font-size: 50px">Bienvenue</p>
                     </div>
                     <?php
+                        //Affichage des différentes images du carousel
                         include './src/php/music/print_carousel.php';
                     ?>
                 </div>
             </div>
         </section>
-        <!--TEST AFFICHAGE ALBUMS-->
+        <!--AFFICHAGE ALBUMS-->
         <section id="album">
             <!--Filters-->           
             <form class="mx-auto border rounded border-secondary mb-5 p-3 text-center" style="max-width:400px;" method="get"> 
@@ -86,6 +63,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <?php 
+                                    //Affichage des différents groupes
                                     include './src/php/music/dropdown_get_bands.php';
                                 ?>
                             </div>
@@ -99,16 +77,17 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <?php 
+                                    //Affichage des différents genres
                                     include './src/php/music/dropdown_get_genres.php';
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
-               
-                <button type="submit" value="submit" class="mt-3 btn btn-dark text-light">OK</button>
-            </form>
 
+                <button id="btn-reset" class=" mt-3 btn btn-dark">Reset</button>
+                <button type="submit" class="mt-3 btn btn-dark text-light">OK</button>
+            </form>
         
             <?php
                 //Query pour recupérer les albums
@@ -123,5 +102,9 @@
                 
             </div>
         </section>
+
+        <script src="./src/js/music.js" type="module"></script>
+        <script src="./node_modules/jquery/dist/jquery.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 	</body>
 </html> 

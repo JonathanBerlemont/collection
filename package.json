@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/JonathanBerlemont/collection#readme",
   "dependencies": {
-    "bootstrap": "^4.2.1"
+    "@fortawesome/fontawesome-free": "^5.7.2",
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1"
   }
 }
