@@ -6,20 +6,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == "index.php") ? "active" : null ?>">
                     <a class="nav-link" href="./index.php">Comics</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == "music.php") ? "active" : null ?>">
                     <a class="nav-link" href="./music.php">Musique</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == "roman.php") ? "active" : null ?>">
                     <a class="nav-link" href="#">Romans</a>
                 </li>
             </ul>
         </div>
 
         <div class="ml-auto">
-            <a href=" <?php ?>"><i class="fas fa-plus-square text-light"></i></a>
+            <a id="bouton_ajout" ><i class="fas fa-plus-square text-light"></i></a>
         </div>
     </nav>
 </header>

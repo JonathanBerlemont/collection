@@ -21,12 +21,17 @@
     </head>
 
 	<body class="shadow">
+        <!--Modal de connexion-->
+        <div id="black-div" class="d-none"></div>
+        <?php include './src/php/modal_connection.php' ?>
+
         <!--Bar de navigation-->
         <?php include './src/php/navbar.php' ?>
 
         <!--Titre-->
         <section id="titre"><h1 class="text-center mt-4 py-3 bg-dark text-light"><strong>MUSIQUE</strong></h1></section>
 
+        <!--Compteur de visites-->
         <h3 class="text-center">C'est la <?php echo $compteur?>ème visites de ce site</h3>
 
         <!--CAROUSEL-->
@@ -49,6 +54,7 @@
                 </div>
             </div>
         </section>
+        
         <!--AFFICHAGE ALBUMS-->
         <section id="album">
             <!--Filters-->           
